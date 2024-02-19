@@ -15,6 +15,8 @@ the questions that I attempt to answer in this project.
 Citibike provides open-source historical data on their website
 <https://www.citibikenyc.com/system-data> for analysis.
 
+![citibike](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/e3f23d5f-38a9-4472-b729-755ca77371e1)
+
 ## A. Introduction
 
 Citibike provides open-source historical data on their website:
