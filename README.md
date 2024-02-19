@@ -1,3 +1,3 @@
-Project located in the document above labeled: #"Concrete-Data-Analysis.md"
+Project located in the document above labeled: "CitiBike-Activity-Data-Analysis.md"
 <br>
-Data source used: "concrete.csv"
+Link to data sources: https://citibikenyc.com/system-data
