@@ -6,14 +6,11 @@ CitiBike Ride Activity 2019
 ## Purpose
 
 The goal of this project is to utilize analytics techniques to
-understand customer behavior as it relates to renting bikes in NYC
-across factors such as: gender, day, month, duration, and speed. This
-project will also display how stations should be better optimized based
-on bike volume and day of week.
-
-Some specific questions that I will try to answer: What are the most
-popular days/times of the year that people rent bikes? Which genders
-like to go faster on bikes? How far do riders usually go for?
+understand customer behavior as it relates to renting bikes in NYC. 
+What are the most popular days/times of the year that people rent bikes? Which genders
+like to go faster on bikes? Is there a difference in volume between weekdays and weekends?
+And which stations receive the most arrivals and departures, on average? These are some of
+the questions that I attempt to answer in this project.
 
 Citibike provides open-source historical data on their website
 <https://www.citibikenyc.com/system-data> for analysis.
@@ -379,7 +376,7 @@ bikest$tripduration <- bikest$tripduration/60
 hist(bikest$tripduration, 30, main = "Distribution of Trip Duration", xlab = "Time (minutes)", probability = TRUE)
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![1  trip_duration_hist](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/d7ce3d8b-d6f4-41f4-9168-ff9bcfc2f5f9)
 
 The above plot is a probability histogram showing that the distribution
 of trip durations is heavily skewed to the right, as discussed earlier.
@@ -393,7 +390,7 @@ lasting fewer than 11 minutes is approximately 25%.
 hist(bikes$age, main = "Distribution of Age", xlab = "Age", probability = TRUE)
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![2  age_hist](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/d777ddc1-584b-4895-a772-86fcba9f8393)
 
 The probability histogram of ages shows a few interesting things with
 its shape. The first is that this histogram does not represent a normal
@@ -412,7 +409,7 @@ bikes_no.age.na <- subset(bikes, (is.na(bikes$age) == FALSE) )
 boxplot(bikes_no.age.na$age, main = "Age")
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![3  age_box](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/241eb01d-e3c2-4103-a904-37c44276cd00)
 
 The boxplot shows that there are a significant number of outliers, which
 is not surprising considering the age/birth year problems identified and
@@ -439,7 +436,7 @@ the original data in bikes.
 hist(bikes$distance, main = "Distribution of Trip Distance", xlab = "Distance (m)", probability = TRUE)
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![4  dist_hist](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/3ca01664-7b28-4022-931f-fec1cb50a754)
 
 Similar to the previous probability histograms, we see that the
 distribution of trip distances is skewed right with some
@@ -453,7 +450,7 @@ a clearer picture.
 barplot(tapply(X = bikes$distance, INDEX = bikes$month, FUN = mean, na.rm =T), names.arg = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"), ylim = c(0, 2000), main = "Average Travel Distance per Month", ylab = "Distance (m)")
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![5  dist_trend](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/8afcf460-76d7-463b-9ac7-c58f5e1ca189)
 
 - Though average distance over the course of the year appears to be
   relatively stable, there is still a noticeable increase in the average
@@ -470,7 +467,7 @@ plot_uh <- ggplot(data = bikes, aes(x=hour, colour = daytime))
 plot_uh + geom_bar() + facet_wrap( ~month) + ggtitle("Rides per Hour Separated by Month")
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![6  traffic_daytime](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/2fd724c0-1cf4-4b79-a412-fe25eae3bac2)
 
 - This plot shows that overall CitiBike traffic for 2019 has been
   increasing steadily throughout the year and then falling after
@@ -492,20 +489,14 @@ plot_6 <- ggplot(bikes, aes(x=hour, fill = weekday, label = hour))
 plot_6+geom_bar()+ggtitle("Average Rides per Hour")+labs(x= "Hour of the Day", y= "Amount of Rides")
 ```
 
-    ## Warning: The following aesthetics were dropped during statistical transformation: label
-    ## ℹ This can happen when ggplot fails to infer the correct grouping structure in
-    ##   the data.
-    ## ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-    ##   variable into a factor?
-
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![7  dayofweek_time](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/12408059-cca3-4a5b-9c1d-60315d584ea0)
 
 ``` r
 plot_uh2 <- ggplot(data = bikes, aes(x=hour, colour = daytime))
 plot_uh2 + geom_bar()+facet_wrap( ~weekday)+ggtitle("Rides per Hour Separated by Weekday")
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![8  dayofweek_time2](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/8f27f553-0523-4eed-8246-9754de2cfcfa)
 
 The above plots further reveal that the overall traffic pattern
 discussed above arises as the “average” due to the “weekday” data
@@ -534,7 +525,7 @@ plot_3+geom_point()+geom_smooth()+ggtitle("Rides per Day")+labs(x = "Date", y="N
 
     ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+![9  dayofweek_trend](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/9e75d785-8b9e-4b57-9578-c44a13bba0e3)
 
 Two traffic conclusions can be drawn from the above graph:
 
@@ -560,7 +551,7 @@ bikes$start_end <- paste(bikes$start.station.name, bikes$end.station.name, sep =
 barplot(sort(table(bikes$start_end),decreasing=TRUE)[1:5], main = "Frequencies of Most Recurrent Routes", ylab = "Frequency", las = 1, cex.names = 0.25)
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![10  freq_routes](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/755009c1-4f62-4bf8-8d0a-c7bb5ed61e3f)
 
 - From this plot, we can see that the most frequent route pattern, is
   the route which starts at the station on E 7 St & Avenue A and ends at
@@ -578,11 +569,7 @@ plot_as + geom_smooth()+ggtitle("Average Traveling Speed as a Function of Age")+
 
     ## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
 
-    ## Warning: Computation failed in `stat_smooth()`
-    ## Caused by error in `gam.fit3()`:
-    ## ! 'R_Calloc' could not allocate memory (988121 of 8 bytes)
-
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![11  speed_age_gender](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/f776b2c1-ed14-4d6e-9124-17eb10f48fe7)
 
 - There seems to be a pattern when looking at speed through the lense of
   age and gender. On average, males bicycle at a faster speed than
@@ -608,7 +595,7 @@ plot_4 + geom_point() + geom_smooth() + ggtitle("Average Trip Duration per Ride"
 
     ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![12  duration_dow](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/efce4d9d-a3ba-48b7-bcd1-29fef91f6c9c)
 
 - Weekend trip durations are, on average, longer than weekday trip
   durations. Also, the shaded regions around each line show that there’s
@@ -678,7 +665,7 @@ map6 <- map6[order(map6$sum, decreasing = T),]
 leaflet(data = map6) %>% addTiles() %>% addCircleMarkers (radius = ~ abs(sum)/4, color = ~ ifelse(sum > 0, "green", "red"), stroke = FALSE, fillOpacity = 0.5, ~ longitude, ~ latitude, label = ~ paste("Station: ", start.station.name, "," , ifelse(sum > 0, "Average gain per day: ", "Average loss per day: "), round(abs(sum), digits = 2)))
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+![13  map1](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/772db183-f638-4323-9965-c5e7b669db14)
 
 For weekdays, there seems to be a pattern of stations losing bikes
 around Central Park and Manhattan area while gaining bikes in the South
@@ -716,7 +703,7 @@ map3 <- map3[order(map3$sum, decreasing = T),]
 leaflet(data = map3) %>% addTiles() %>% addCircleMarkers (radius = ~ abs(sum)/2, color = ~ ifelse(sum > 0, "green", "red"), stroke = FALSE, fillOpacity = 0.5, ~ longitude, ~ latitude, label = ~ paste("Station: ", start.station.name, "," , ifelse(sum > 0, "Avergae gain per day: ", "Average loss per day: "), round(abs(sum), digits = 2)))
 ```
 
-![](CitiBike-Activity-Data-Analysis_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+![14  map2](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/146d05c2-25ac-4bea-8bd2-873e5df3b145)
 
 There seems to be a pattern of rides beginning in the upper part of
 Manhattan and ending in the lower part when people use citiBike on
