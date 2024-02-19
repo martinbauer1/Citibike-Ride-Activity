@@ -3,7 +3,8 @@ CitiBike Ride Activity 2019
 
 ### By Martin Bauer
 
-## Purpose
+## A. Introduction
+### Purpose
 
 The goal of this project is to utilize analytics techniques to
 understand customer behavior as it relates to renting bikes in NYC. 
@@ -17,11 +18,6 @@ Citibike provides open-source historical data on their website
 
 ![citibike](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/e3f23d5f-38a9-4472-b729-755ca77371e1)
 
-## A. Introduction
-
-Citibike provides open-source historical data on their website:
-
-<https://www.citibikenyc.com/system-data>
 
 ## B. Data Preparation
 
@@ -641,6 +637,8 @@ displays changes for weekdays. Stations with an average gain of bikes
 each day are in green and the average loss in red. The size of the
 circle indicates the relative amount of bikes being lost or gained.
 
+- Note: Both maps are only interactive in the R environment and in an html format. Since this file was knitted to a github_document and committed to github, these visuals can only be shown as screenshots.
+
 ``` r
 stations <- filter(sep, weekend == "Weekday")
 
@@ -668,6 +666,7 @@ leaflet(data = map6) %>% addTiles() %>% addCircleMarkers (radius = ~ abs(sum)/4,
 ```
 
 ![13  map1](https://github.com/martinbauer1/Citibike-Ride-Activity/assets/154390228/772db183-f638-4323-9965-c5e7b669db14)
+
 
 For weekdays, there seems to be a pattern of stations losing bikes
 around Central Park and Manhattan area while gaining bikes in the South
